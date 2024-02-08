@@ -5,95 +5,113 @@
 
 #define dimensiune_matrice 40
 #define lungime_maxima_cuvant 100
+#define dim_spanzuratoare_1 10
+#define dim_spanzuratoare_2 14
+#define dim_spanzuratoare_3 3
+#define dim_spanzuratoare_4 8
+#define body_length1 25
+#define body_length2 30
+#define gat_height 6
+#define mana_height 6
+#define mana_s_length 20
+#define mana_d_length 32
+#define picior_height 10
+#define body_height 9
+
+
+
+
+
+
 
 void model_spanzuratoarea(char spanzuratoare[dimensiune_matrice][dimensiune_matrice])
 {
-    for(int i=1;i<=10;i++)
+    for(int i=1;i<=dim_spanzuratoare_1;i++)
     {
-        spanzuratoare[14][i]='_';
+        spanzuratoare[dim_spanzuratoare_2][i]='_';
     }
-    for(int i=2;i<=14;i++)
+    for(int i=2;i<=dim_spanzuratoare_2;i++)
     {
-        spanzuratoare[i][3]='|';
-        spanzuratoare[i][8]='|';
+        spanzuratoare[i][dim_spanzuratoare_3]='|';
+        spanzuratoare[i][dim_spanzuratoare_4]='|';
     }
-    for(int i=3;i<=29;i++)
+    for(int i=3;i<=body_length2-1;i++)
     {
         spanzuratoare[1][i]='_';
     }
-    for(int i=8;i<=26;i++)
+    for(int i=dim_spanzuratoare_4;i<=body_length1+1;i++)
     {
         spanzuratoare[2][i]='_';
     }
-    spanzuratoare[3][26]='|';
-    spanzuratoare[2][29]='|';
-    spanzuratoare[3][29]='|';
+    spanzuratoare[3][body_length1+1]='|';
+    spanzuratoare[2][body_length2-1]='|';
+    spanzuratoare[3][body_length2-1]='|';
 }
 void deseneaza(int n,char spanzuratoare[dimensiune_matrice][dimensiune_matrice])
 {
-    if(n==1)
+    if(n==1) //cap
     {
-        spanzuratoare[3][25]=spanzuratoare[3][27]=spanzuratoare[3][28]=spanzuratoare[3][30]='_';
-        spanzuratoare[4][24]=spanzuratoare[5][24]='|';
-        spanzuratoare[4][31]=spanzuratoare[5][31]='|';
-        for(int i=25;i<=30;i++) spanzuratoare[5][i]='_';
+        for(int i=body_length1;i<=body_length2;i++) spanzuratoare[3][i]='_';
+        spanzuratoare[4][body_length1-1]=spanzuratoare[5][body_length1-1]='|';
+        spanzuratoare[4][body_length2+1]=spanzuratoare[5][body_length2+1]='|';
+        for(int i=body_length1;i<=body_length2;i++) spanzuratoare[5][i]='_';
     }
-    if(n==2)
+    if(n==2) //gat
     {
-        spanzuratoare[6][26]=spanzuratoare[6][29]='|';
+        spanzuratoare[gat_height][body_length1+1]=spanzuratoare[gat_height][body_length2-1]='|';
     }
-    if(n==3)
+    if(n==3) //body
     {
-        for(int i=7;i<=9;i++)
+        for(int i=gat_height+1;i<=body_height;i++)
         {
-            spanzuratoare[i][24]='|';
-            spanzuratoare[i][31]='|';
+            spanzuratoare[i][body_length1-1]='|';
+            spanzuratoare[i][body_length2+1]='|';
         }
-        for(int i=25;i<=30;i++)
+        for(int i=body_length1;i<=body_length2;i++)
         {
-            spanzuratoare[9][i]='_';
+            spanzuratoare[body_height][i]='_';
         }
     }
-    if(n==4)
+    if(n==4)//mana stanga
     {
-        for(int i=20;i<=23;i++)
+        for(int i=mana_s_length;i<=mana_s_length+3;i++)
         {
-            spanzuratoare[6][i]=spanzuratoare[7][i]='_';
+            spanzuratoare[mana_height][i]=spanzuratoare[mana_height+1][i]='_';
         }
-        spanzuratoare[7][19]='|';
+        spanzuratoare[mana_height+1][mana_s_length-1]='|';
     }
-    if(n==5)
+    if(n==5) //mana dreapta
     {
-        for(int i=32;i<=35;i++)
+        for(int i=mana_d_length;i<=mana_d_length+3;i++)
         {
-            spanzuratoare[6][i]=spanzuratoare[7][i]='_';
+            spanzuratoare[mana_height][i]=spanzuratoare[mana_height+1][i]='_';
         }
-        spanzuratoare[7][36]='|';
+        spanzuratoare[mana_height+1][mana_d_length+4]='|';
     }
-    if(n==6)
+    if(n==6) //picior stang
     {
-        for(int i=10;i<=11;i++)
+        for(int i=picior_height;i<=picior_height+1;i++)
         {
-            spanzuratoare[i][24]='|';
-            spanzuratoare[i][26]='|';
+            spanzuratoare[i][body_length1-1]='|';
+            spanzuratoare[i][body_length1+1]='|';
         }
-        spanzuratoare[11][25]='_';
+        spanzuratoare[picior_height+1][body_length1]='_';
     }
-    if(n==7)
+    if(n==7) //picior drept
     {
-        for(int i=10;i<=11;i++)
+        for(int i=picior_height;i<=picior_height+1;i++)
         {
-            spanzuratoare[i][29]='|';
-            spanzuratoare[i][31]='|';
+            spanzuratoare[i][body_length2-1]='|';
+            spanzuratoare[i][body_length2+1]='|';
         }
-        spanzuratoare[11][30]='_';
+        spanzuratoare[picior_height+1][body_length2]='_';
     }
 }
-void afisare(char spanzuratoare[40][40])
+void afisare(char spanzuratoare[dimensiune_matrice][dimensiune_matrice])
 {
-    for(int i=0;i<20;i++)
+    for(int i=0;i<dimensiune_matrice/2;i++)
     {
-        for(int j=0;j<40;j++)
+        for(int j=0;j<dimensiune_matrice;j++)
         {
             printf("%c",spanzuratoare[i][j]);
         }
@@ -126,7 +144,7 @@ int main() {
 
     printf("Cuvantul este din %llu litere \n", strlen(cuvant)-1);
 
-    char ghicitoare[100];
+    char ghicitoare[lungime_maxima_cuvant];
     strcpy(ghicitoare,cuvant);
     for(int i=0;i<strlen(cuvant);i++)
     {
